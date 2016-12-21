@@ -5,6 +5,8 @@ define udev::rule (
   $source   = undef,
 ) {
 
+  include ::udev
+
   validate_re($ensure, '^(present|absent)$')
   validate_bool($trigger)
 
@@ -19,14 +21,8 @@ define udev::rule (
     fail('Please define $content or $source!')
   }
 
-  include ::udev::params
-
-  exec { "${::udev::params::udevadm_trigger}":
-    refreshonly => true,
-  }
-
   if ($trigger == true and $ensure == 'present') {
-    $notify = Exec["${::udev::params::udevadm_trigger}"]
+    $notify = Class['::udev::trigger']
   } else {
     $notify = undef
   }

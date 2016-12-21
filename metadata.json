@@ -1,6 +1,6 @@
 {
   "name": "erezz-udev",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "author": "Erez Zarum",
   "summary": "Puppet module to configure udev rules",
   "license": "Apache-2.0",
